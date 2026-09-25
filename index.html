@@ -12,7 +12,7 @@
 <meta property="og:title" content="ビバリウム">
 <meta property="og:description" content="さらの なかで いきものが たべて ふえて かわっていく。ほうっておくと どんな いきものが あらわれるかな？">
 <title>ビバリウム</title>
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 <canvas id="game"></canvas>
@@ -23,7 +23,9 @@
     <div class="stat"><b id="h-grass">0</b><span>くさ</span></div>
     <div class="stat"><b id="h-gen">0</b><span>せだい</span></div>
     <div class="stat"><b id="h-time">0:00</b><span>さらの とし</span></div>
-    <button id="b-dex" class="chip">図鑑 <b id="h-dex">0</b>/12</button>
+    <div class="stat" id="h-seasonbox" hidden><b id="h-season">はる</b><span>きせつ</span></div>
+    <button id="b-dex" class="chip">図鑑 <b id="h-dex">0</b>/17</button>
+    <button id="b-mis" class="chip">ミッション <b id="h-mis">0</b>/20</button>
     <button id="b-rec" class="chip">きろく</button>
   </div>
   <div id="ticker"></div>
@@ -32,8 +34,12 @@
 <div id="ctrl">
   <div class="seg" data-key="food"><span class="lbl">くさ</span><button data-v="0">すくない</button><button data-v="1">ふつう</button><button data-v="2">おおい</button></div>
   <div class="seg" data-key="where"><span class="lbl">ばしょ</span><button data-v="0">ぜんぶ</button><button data-v="1">ひだり</button><button data-v="2">みぎ</button></div>
+  <div class="seg" data-key="temp"><span class="lbl">おんど</span><button data-v="1">さむい</button><button data-v="0">ふつう</button><button data-v="2">あつい</button></div>
   <div class="seg" data-key="wall"><span class="lbl">かべ</span><button data-v="0">なし</button><button data-v="1">あり</button></div>
+  <div class="seg" data-key="pond"><span class="lbl">どくの いけ</span><button data-v="0">なし</button><button data-v="1">あり</button></div>
+  <div class="seg" data-key="season"><span class="lbl">きせつ</span><button data-v="0">なし</button><button data-v="1">あり</button></div>
   <div class="seg" data-key="speed"><span class="lbl">はやさ</span><button data-v="1">×1</button><button data-v="4">×4</button><button data-v="16">×16</button></div>
+  <button id="meteor" class="danger">☄ いんせき</button>
 </div>
 
 <div id="info" hidden>
@@ -43,9 +49,14 @@
     <div class="ib"><span>はやさ</span><div class="bar"><i id="ib-speed"></i></div><em id="iv-speed"></em></div>
     <div class="ib"><span>め</span><div class="bar"><i id="ib-sight"></i></div><em id="iv-sight"></em></div>
     <div class="ib"><span>たべもの</span><div class="bar diet"><i id="ib-diet"></i></div><em id="iv-diet"></em></div>
+    <div class="ib"><span>から</span><div class="bar"><i id="ib-shell"></i></div><em id="iv-shell"></em></div>
+    <div class="ib"><span>どく</span><div class="bar"><i id="ib-poison"></i></div><em id="iv-poison"></em></div>
+    <div class="ib"><span>むれ</span><div class="bar"><i id="ib-herd"></i></div><em id="iv-herd"></em></div>
+    <div class="ib"><span>いろ</span><div class="bar"><i id="ib-hue"></i></div><em id="iv-hue"></em></div>
   </div>
   <div id="i-why"></div>
   <div id="i-energy"></div>
+  <div id="i-anc"><span class="alabel">せんぞ</span><div id="i-ancstrip"></div></div>
 </div>
 
 <div id="panel" hidden>
@@ -74,7 +85,7 @@
   </div>
 </div>
 
-<script src="sim.js?v=1"></script>
-<script src="game.js?v=1"></script>
+<script src="sim.js?v=2"></script>
+<script src="game.js?v=2"></script>
 </body>
 </html>
