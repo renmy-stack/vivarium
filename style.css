@@ -1,0 +1,80 @@
+:root {
+  --ink: #0f1f2b;
+  --paper: #f6f3ea;
+  --accent: #4cd26b;
+  --hot: #ff7a1a;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  height: 100%; margin: 0; overflow: hidden; background: #0f1f2b;
+  font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  color: #fff; -webkit-user-select: none; user-select: none; touch-action: none;
+}
+button { font: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+[hidden] { display: none !important; }
+#game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+
+/* 上 */
+#hud { position: fixed; left: 0; right: 0; top: 0; padding: max(8px, env(safe-area-inset-top)) 10px 0; pointer-events: none; }
+#hud .row { display: flex; gap: 4px; align-items: center; flex-wrap: nowrap; }
+.stat { display: flex; flex-direction: column; align-items: center; line-height: 1.05; background: rgba(15,31,43,.7); border-radius: 10px; padding: 3px 5px; min-width: 40px; }
+.stat b { font-size: 15px; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 10px; opacity: .8; }
+.chip { pointer-events: auto; border: 2px solid rgba(255,255,255,.7); background: rgba(15,31,43,.75); color: #fff; border-radius: 999px; padding: 5px 8px; font-weight: 800; font-size: 12px; margin-left: auto; white-space: nowrap; }
+.chip + .chip { margin-left: 0; }
+#ticker { margin-top: 6px; font-size: 13px; font-weight: 800; color: #ffe08a; text-shadow: 0 1px 2px #000; min-height: 1.2em; }
+
+/* 下: 環境の設定 */
+#ctrl { position: fixed; left: 0; right: 0; bottom: max(8px, env(safe-area-inset-bottom)); padding: 0 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.seg { display: flex; align-items: center; gap: 3px; background: rgba(15,31,43,.75); border-radius: 12px; padding: 4px; }
+.seg .lbl { font-size: 11px; font-weight: 800; opacity: .85; padding: 0 4px; white-space: nowrap; }
+.seg button { flex: 1; border: 0; background: transparent; color: #cfd8dc; border-radius: 8px; padding: 6px 2px; font-weight: 800; font-size: 12px; white-space: nowrap; }
+.seg button.on { background: var(--accent); color: var(--ink); }
+
+/* 生き物の説明 */
+#info { position: fixed; left: 10px; right: 10px; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 96px); background: rgba(246,243,234,.97); color: var(--ink); border-radius: 16px; padding: 10px 12px; box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+.ihead { display: flex; align-items: baseline; gap: 8px; font-weight: 900; font-size: 16px; }
+.ihead span:last-of-type { font-size: 12px; opacity: .7; font-weight: 700; flex: 1; }
+.x { border: 0; background: transparent; font-size: 22px; line-height: 1; padding: 0 4px; color: var(--ink); }
+.ibars { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; margin-top: 6px; }
+.ib { display: grid; grid-template-columns: 52px 1fr 34px; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; }
+.bar { height: 10px; border-radius: 5px; background: rgba(15,31,43,.12); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #4cd26b, #ffd54f); border-radius: 5px; }
+.bar.diet { background: linear-gradient(90deg, #6bd26b, #ff5a5a); }
+.bar.diet i { background: transparent; border-right: 3px solid var(--ink); }
+.ib em { font-style: normal; text-align: right; font-size: 11px; }
+#i-why { margin-top: 6px; font-size: 12px; line-height: 1.5; }
+#i-why b { color: #c2410c; }
+#i-energy { margin-top: 4px; font-size: 12px; font-weight: 800; }
+
+/* パネル（図鑑・きろく） */
+#panel, #overlay, #sharebox { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 14px; background: rgba(5,15,22,.6); }
+.pbox { width: min(94vw, 420px); max-height: calc(100% - 20px); overflow-y: auto; background: var(--paper); color: var(--ink); border-radius: 18px; padding: 14px 14px 16px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+.pbox.small { text-align: center; }
+.phead { display: flex; align-items: center; justify-content: space-between; font-weight: 900; font-size: 18px; margin-bottom: 8px; }
+.dex { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.dx { display: flex; gap: 8px; align-items: flex-start; background: #fff; border-radius: 12px; padding: 8px; border: 2px solid rgba(15,31,43,.1); }
+.dx.locked { opacity: .5; }
+.dx canvas { width: 44px; height: 44px; flex: none; }
+.dx .t { font-size: 12px; line-height: 1.35; }
+.dx .t b { font-size: 13px; display: block; }
+.dx .t small { display: block; opacity: .75; font-size: 10px; margin-top: 2px; }
+.recs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.rc { background: #fff; border-radius: 10px; padding: 6px 8px; font-size: 12px; font-weight: 800; }
+.rc b { display: block; font-size: 18px; color: var(--hot); }
+.evlog { font-size: 12px; line-height: 1.5; max-height: 30vh; overflow-y: auto; background: #fff; border-radius: 10px; padding: 6px 8px; }
+.evlog div span { opacity: .6; margin-right: 6px; font-variant-numeric: tabular-nums; }
+.rbtns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+.main, .sub { border: 3px solid var(--ink); border-radius: 14px; padding: 9px 18px; font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); }
+.main { background: var(--hot); color: #fff; }
+.sub { background: #fff; color: var(--ink); }
+.main:active, .sub:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.obar { height: 14px; border-radius: 7px; background: rgba(15,31,43,.12); overflow: hidden; margin: 8px 0; }
+.obar i { display: block; height: 100%; width: 0; background: var(--accent); }
+#o-text { font-size: 13px; font-weight: 700; }
+#banner { position: fixed; left: 10px; right: 10px; top: calc(max(8px, env(safe-area-inset-top)) + 70px); display: flex; gap: 6px; align-items: center; background: rgba(46,125,50,.92); border-radius: 12px; padding: 8px 10px; font-weight: 800; font-size: 13px; }
+#banner span { flex: 1; }
+#banner .chip { margin-left: 0; padding: 5px 10px; }
+#shareimg { width: 100%; border-radius: 10px; border: 2px solid var(--ink); }
+.note { font-size: 12px; margin: 6px 0; text-align: center; }
+#sharetext { width: 100%; height: 84px; font-size: 13px; border-radius: 8px; border: 2px solid var(--ink); padding: 6px; resize: none; font-family: inherit; }

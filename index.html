@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f1f2b">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-title" content="ビバリウム">
+<meta property="og:title" content="ビバリウム">
+<meta property="og:description" content="さらの なかで いきものが たべて ふえて かわっていく。ほうっておくと どんな いきものが あらわれるかな？">
+<title>ビバリウム</title>
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="hud">
+  <div class="row">
+    <div class="stat"><b id="h-pop">0</b><span>ひき</span></div>
+    <div class="stat"><b id="h-grass">0</b><span>くさ</span></div>
+    <div class="stat"><b id="h-gen">0</b><span>せだい</span></div>
+    <div class="stat"><b id="h-time">0:00</b><span>さらの とし</span></div>
+    <button id="b-dex" class="chip">図鑑 <b id="h-dex">0</b>/12</button>
+    <button id="b-rec" class="chip">きろく</button>
+  </div>
+  <div id="ticker"></div>
+</div>
+
+<div id="ctrl">
+  <div class="seg" data-key="food"><span class="lbl">くさ</span><button data-v="0">すくない</button><button data-v="1">ふつう</button><button data-v="2">おおい</button></div>
+  <div class="seg" data-key="where"><span class="lbl">ばしょ</span><button data-v="0">ぜんぶ</button><button data-v="1">ひだり</button><button data-v="2">みぎ</button></div>
+  <div class="seg" data-key="wall"><span class="lbl">かべ</span><button data-v="0">なし</button><button data-v="1">あり</button></div>
+  <div class="seg" data-key="speed"><span class="lbl">はやさ</span><button data-v="1">×1</button><button data-v="4">×4</button><button data-v="16">×16</button></div>
+</div>
+
+<div id="info" hidden>
+  <div class="ihead"><span id="i-name">いきもの</span><span id="i-sub"></span><button id="i-close" class="x">×</button></div>
+  <div class="ibars">
+    <div class="ib"><span>おおきさ</span><div class="bar"><i id="ib-size"></i></div><em id="iv-size"></em></div>
+    <div class="ib"><span>はやさ</span><div class="bar"><i id="ib-speed"></i></div><em id="iv-speed"></em></div>
+    <div class="ib"><span>め</span><div class="bar"><i id="ib-sight"></i></div><em id="iv-sight"></em></div>
+    <div class="ib"><span>たべもの</span><div class="bar diet"><i id="ib-diet"></i></div><em id="iv-diet"></em></div>
+  </div>
+  <div id="i-why"></div>
+  <div id="i-energy"></div>
+</div>
+
+<div id="panel" hidden>
+  <div class="pbox">
+    <div class="phead"><span id="p-title"></span><button id="p-close" class="x">×</button></div>
+    <div id="p-body"></div>
+  </div>
+</div>
+
+<div id="overlay" hidden>
+  <div class="pbox small">
+    <div id="o-title" class="phead">るすの あいだを けいさん中…</div>
+    <div class="obar"><i id="o-fill"></i></div>
+    <div id="o-text"></div>
+  </div>
+</div>
+
+<div id="banner" hidden><span id="banner-text"></span><button id="banner-btn" class="chip"></button><button id="banner-btn2" class="chip"></button></div>
+
+<div id="sharebox" hidden>
+  <div class="pbox">
+    <img id="shareimg" alt="皿の画像">
+    <div class="note">画像を長押しで保存できます</div>
+    <textarea id="sharetext" readonly></textarea>
+    <div class="rbtns"><button id="copy" class="main">文をコピー</button><button id="closeshare" class="sub">とじる</button></div>
+  </div>
+</div>
+
+<script src="sim.js?v=1"></script>
+<script src="game.js?v=1"></script>
+</body>
+</html>

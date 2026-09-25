@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0;background:#000">
+<!-- アイコン: 皿と 生き物 3 匹（草食・肉食・ちび）。headless Chrome で 512×512 のスクショを撮る -->
+<canvas id="c" width="512" height="512" style="display:block"></canvas>
+<script>
+const g = document.getElementById('c').getContext('2d');
+g.fillStyle = '#0f1f2b'; g.fillRect(0, 0, 512, 512);
+g.fillStyle = '#183447'; g.beginPath(); g.arc(256, 256, 236, 0, 7); g.fill();
+const wat = g.createRadialGradient(180, 180, 40, 256, 256, 230); wat.addColorStop(0, '#2b5f70'); wat.addColorStop(1, '#1d4453');
+g.fillStyle = wat; g.beginPath(); g.arc(256, 256, 222, 0, 7); g.fill();
+g.strokeStyle = '#3d6d80'; g.lineWidth = 12; g.beginPath(); g.arc(256, 256, 228, 0, 7); g.stroke();
+g.strokeStyle = '#7ee08a'; g.lineWidth = 4; g.lineCap = 'round';
+for (const [x, y] of [[150, 300], [330, 120], [200, 400], [380, 330], [110, 180], [300, 420], [420, 220], [250, 200]]) { g.beginPath(); g.moveTo(x - 7, y + 7); g.lineTo(x, y - 9); g.lineTo(x + 7, y + 7); g.stroke(); }
+function creature(x, y, r, col, sight, teeth, rot) {
+  g.save(); g.translate(x, y); g.rotate(rot);
+  g.strokeStyle = col; g.lineWidth = r * 0.35; g.beginPath(); g.moveTo(-r * 0.8, 0); g.quadraticCurveTo(-r * 1.4, r * 0.3, -r * 1.8, r * 0.6); g.stroke();
+  g.fillStyle = col; g.beginPath(); g.ellipse(0, 0, r * 1.05, r * 0.95, 0, 0, 7); g.fill(); g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 3; g.stroke();
+  const er = sight, ex = r * 0.45, ey = r * 0.42;
+  for (const s of [-1, 1]) { g.fillStyle = '#fff'; g.beginPath(); g.arc(ex, s * ey, er, 0, 7); g.fill(); g.fillStyle = '#0f1f2b'; g.beginPath(); g.arc(ex + er * 0.35, s * ey, er * 0.55, 0, 7); g.fill(); }
+  if (teeth) { g.fillStyle = '#fff'; for (let k = 0; k < 3; k++) { const yy = (k - 1) * r * 0.32; g.beginPath(); g.moveTo(r * 0.85, yy - r * 0.12); g.lineTo(r * 1.15, yy); g.lineTo(r * 0.85, yy + r * 0.12); g.closePath(); g.fill(); } }
+  else { g.strokeStyle = 'rgba(0,0,0,.45)'; g.lineWidth = 3; g.beginPath(); g.arc(r * 0.75, 0, r * 0.22, -1.2, 1.2); g.stroke(); }
+  g.restore();
+}
+creature(200, 250, 58, 'hsl(40,70%,62%)', 14, false, -0.3);
+creature(340, 330, 44, 'hsl(350,85%,48%)', 9, true, 2.6);
+creature(330, 170, 26, 'hsl(200,70%,62%)', 10, false, 0.6);
+</script></body></html>
